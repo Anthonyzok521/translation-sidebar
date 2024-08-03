@@ -13,9 +13,11 @@
     "main": "./out/extension.js",
     "contributes": {
         "commands": [{
-            "command": "translation-panel.helloWorld",
-            "title": "Hello World"
+            "command": "translation-panel.translate",
+            "title": "Translate",
+            "category": "Translation Panel"
         }],
+
         "viewsContainers": {
             "activitybar": [{
                 "id": "translation-panel",
@@ -25,8 +27,10 @@
         },
         "views": {
             "translation-panel": [{
-                "id": "translate",
-                "name": "Translate"
+                "id": "translate-sidebar",
+                "name": "Translate",
+                "type": "webview",
+                "icon": "resources/icon.svg"
             }]
         }
     },
