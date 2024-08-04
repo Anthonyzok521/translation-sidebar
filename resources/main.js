@@ -1,6 +1,8 @@
-const btn = document.querySelector('button');
 const languages = document.querySelector('.languages');
 const code = document.querySelectorAll('.code');
+const input = document.querySelector('#input');
+const output = document.querySelector('#output');
+const btn = document.querySelector('#btn');
 
 languages.addEventListener('click', (e) => {
     if (e.target && e.target.tagName === 'DIV') {
@@ -26,7 +28,20 @@ languages.addEventListener('click', (e) => {
     }
 });
 
+btn.addEventListener('click', async() => {
+    if (input.value !== '') {
+        const res = await fetch("https://translate-gemini-api.vercel.app", {
+            method: "POST",
+            body: JSON.stringify({
+                text: `${input.value}`,
+                from_lang: `${code[0].textContent.toLowerCase()}`,
+                to_lang: `${code[1].textContent.toLowerCase()}`,
+            }),
+            headers: { "Content-Type": "application/json" }
+        });
 
-btn.addEventListener('click', () => {
-
+        let result = await res.json();
+        console.log(result);
+        output.value = result;
+    }
 });

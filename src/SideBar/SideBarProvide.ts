@@ -77,7 +77,7 @@ class SideBarProvider implements vscode.WebviewViewProvider {
         </div>
       </div>
       <div class="action-btn">
-        <button>Translate</button>
+        <button id="btn">Translate</button>
       </div>
     </div>
     <script nonce="${nonce}" src="${scriptUri}"></script>
