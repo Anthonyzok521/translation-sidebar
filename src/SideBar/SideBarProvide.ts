@@ -70,7 +70,11 @@ class SideBarProvider implements vscode.WebviewViewProvider {
       <div class="boxs">
         <textarea aria-multiline="true" id="input"> </textarea>
         <div class="space"></div>
-        <textarea aria-multiline="true" id="output"> </textarea>
+        <textarea readonly aria-multiline="true" id="output"> </textarea>
+        <div class="langs-code">
+            <div class="code anim">En</div>
+            <div class="code anim">Es</div>
+        </div>
       </div>
       <div class="action-btn">
         <button>Translate</button>
