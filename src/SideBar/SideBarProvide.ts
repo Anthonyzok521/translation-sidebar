@@ -44,6 +44,7 @@ class SideBarProvider implements vscode.WebviewViewProvider {
         const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'main.js'));
         const style = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'style.css'));
         const image = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'icon.svg'));
+        const copy = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'copy.svg'));
         const nonce = getNonce();
 
         let html: string = `
@@ -70,7 +71,11 @@ class SideBarProvider implements vscode.WebviewViewProvider {
       <div class="boxs">
         <textarea aria-multiline="true" id="input"> </textarea>
         <div class="space"></div>
-        <textarea readonly aria-multiline="true" id="output"> </textarea>
+        <div class="out">
+            <textarea readonly aria-multiline="true" id="output"> </textarea>
+            <div class="loader"></div>
+            <img class="copy" src="${copy}">
+        </div>
         <div class="langs-code">
             <div class="code anim">En</div>
             <div class="code anim">Es</div>
@@ -80,7 +85,7 @@ class SideBarProvider implements vscode.WebviewViewProvider {
         <button id="btn">Translate</button>
       </div>
     </div>
-    <script nonce="${nonce}" src="${scriptUri}"></script>
+    <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
 </body>
 
 </html>

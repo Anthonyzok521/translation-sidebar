@@ -3,6 +3,8 @@ const code = document.querySelectorAll('.code');
 const input = document.querySelector('#input');
 const output = document.querySelector('#output');
 const btn = document.querySelector('#btn');
+const copy = document.querySelector('.copy');
+const loader = document.querySelector('.loader');
 
 languages.addEventListener('click', (e) => {
     if (e.target && e.target.tagName === 'DIV') {
@@ -30,6 +32,7 @@ languages.addEventListener('click', (e) => {
 
 btn.addEventListener('click', async() => {
     if (input.value !== '') {
+        loader.classList.toggle('spinner');
         const res = await fetch("https://translate-gemini-api.vercel.app", {
             method: "POST",
             body: JSON.stringify({
@@ -41,7 +44,28 @@ btn.addEventListener('click', async() => {
         });
 
         let result = await res.json();
+
         console.log(result);
         output.value = result;
+        if (output.value !== '') {
+            loader.classList.toggle('spinner');
+        }
     }
 });
+
+copy.addEventListener('click', () => {
+    copy.classList.toggle('click');
+    setTimeout(() => {
+        copy.classList.toggle('click');
+    }, 500);
+
+    writeClipboardText(output.value);
+});
+
+async function writeClipboardText(text) {
+    try {
+        await navigator.clipboard.writeText(text);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
