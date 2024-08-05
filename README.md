@@ -4,4 +4,4 @@ Quickly access accurate translations from a side panel, similar to the debug vie
 
 # Preview
 
-![alt text](resources/image.png)
+![alt text](https://github.com/Anthonyzok521/translation-sidebar/blob/main/resources/image.png?raw=true)
