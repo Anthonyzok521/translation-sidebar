@@ -3,6 +3,7 @@
     "displayName": "Translation Panel",
     "description": "Quickly access accurate translations from a side panel, similar to the debug view. Translate words, phrases, or blocks of code with a single click and improve your development workflow.",
     "version": "0.0.1",
+    "publisher": "TranslationPanel",
     "engines": {
         "vscode": "^1.92.0"
     },
@@ -12,31 +13,25 @@
     "activationEvents": [],
     "main": "./out/extension.js",
     "contributes": {
-        "commands": [
-            {
-                "command": "translation-panel.translate",
-                "title": "Translate",
-                "category": "Translation Panel"
-            }
-        ],
+        "commands": [{
+            "command": "translation-panel.translate",
+            "title": "Translate",
+            "category": "Translation Panel"
+        }],
         "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "translation-panel",
-                    "title": "Translation Panel",
-                    "icon": "resources/icon.svg"
-                }
-            ]
+            "activitybar": [{
+                "id": "translation-panel",
+                "title": "Translation Panel",
+                "icon": "resources/icon.svg"
+            }]
         },
         "views": {
-            "translation-panel": [
-                {
-                    "id": "translate-sidebar",
-                    "name": "Translate",
-                    "type": "webview",
-                    "icon": "resources/icon.svg"
-                }
-            ]
+            "translation-panel": [{
+                "id": "translate-sidebar",
+                "name": "Translate",
+                "type": "webview",
+                "icon": "resources/icon.svg"
+            }]
         }
     },
     "scripts": {
