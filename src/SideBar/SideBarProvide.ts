@@ -1,7 +1,4 @@
 import * as vscode from 'vscode';
-import fs from 'fs/promises';
-import path from 'path';
-import { encode } from 'punycode';
 
 class SideBarProvider implements vscode.WebviewViewProvider {
 
@@ -33,7 +30,7 @@ class SideBarProvider implements vscode.WebviewViewProvider {
                 case 'chat':
                     {
                         console.log("Char:", data.message);
-                        vscode.commands.executeCommand('translation-panel.translate', { text: data.message });
+                        vscode.commands.executeCommand('translation-sidebar.translate', { text: data.message });
                         break;
                     }
             }
@@ -54,7 +51,7 @@ class SideBarProvider implements vscode.WebviewViewProvider {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Translation Panel</title>
+    <title>Translation Sidebar</title>
     <link rel="stylesheet" type="text/css" href="${style}" nonce="{nonce}">
 </head>
 
