@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-
+import { Langs } from '../langs/langs';
 class SideBarProvider implements vscode.WebviewViewProvider {
 
     public static readonly viewType: string = 'translate-sidebar';
@@ -43,6 +43,7 @@ class SideBarProvider implements vscode.WebviewViewProvider {
         const image = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'icon.svg'));
         const copy = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'copy.svg'));
         const nonce = getNonce();
+        const langs = listLang();
 
         let html: string = `
         <!DOCTYPE html>
@@ -61,9 +62,17 @@ class SideBarProvider implements vscode.WebviewViewProvider {
         <img src="${image}" />
       </div>
       <div class="languages">
-        <div class="lang select" id="lang1">English</div>
+        <div class="lang select" id="lang1">
+            <ul class="list-langs">
+                ${ langs }
+            </ul>
+            English
+            </div>
         <span class="space"></span>
-        <div class="lang" id="lang2">Spanish</div>
+        <div class="lang" id="lang2"><ul class="list-langs">
+                ${ langs }
+            </ul>
+            Spanish</div>
       </div>
       <div class="boxs">
         <textarea aria-multiline="true" id="input"> </textarea>
@@ -103,6 +112,18 @@ function getNonce() {
     }
 
     return text;
+}
+
+function listLang() : string {
+    const list_langs: Array<string> = [];
+    let langs: string = ``;
+
+    Langs.forEach((k, v) => {
+        list_langs.push(''.concat('<li>',v,'</li>'));
+    });
+
+    langs = list_langs.join('\n');
+    return langs;
 }
 
 export default SideBarProvider;

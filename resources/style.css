@@ -4,6 +4,40 @@
     box-sizing: border-box;
 }
 
+li {
+    list-style: none;
+    padding: 10px;
+    color: black;
+    transition: background-color 0.2s ease;
+}
+
+li:hover {
+    background-color: #1874e4;
+    color: white;
+    transition: background-color 0.2s ease;
+}
+
+li.select {
+    background-color: #1874e4;
+    color: white;
+}
+
+.list-langs {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    max-height: 250px;
+    width: auto;
+    overflow-y: scroll;
+    z-index: 10;
+    background-color: white;
+    display: none;
+}
+
+.list-langs.select {
+    display: block;
+}
+
 .container {
     width: 100%;
     justify-content: center;
@@ -94,6 +128,7 @@ textarea {
 }
 
 .languages .lang {
+    position: relative;
     width: 100px;
     height: 100%;
     background-color: white;

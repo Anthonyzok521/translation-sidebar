@@ -2,7 +2,7 @@
     "name": "translation-sidebar",
     "displayName": "Translation Sidebar",
     "description": "Quickly access accurate translations from a side panel, similar to the debug view. Translate words, phrases, or blocks of code with a single click and improve your development workflow.",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "publisher": "AdvancedCommunity",
     "icon": "resources/icon.png",
     "engines": {
