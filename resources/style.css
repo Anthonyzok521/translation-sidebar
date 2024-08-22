@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+span,
+li {
+    user-select: none;
+}
+
 li {
     list-style: none;
     padding: 10px;

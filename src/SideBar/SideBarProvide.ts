@@ -44,6 +44,7 @@ class SideBarProvider implements vscode.WebviewViewProvider {
         const copy = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'copy.svg'));
         const nonce = getNonce();
         const langs = listLang();
+        const langsCode = listLangCode();
 
         let html: string = `
         <!DOCTYPE html>
@@ -66,13 +67,15 @@ class SideBarProvider implements vscode.WebviewViewProvider {
             <ul class="list-langs">
                 ${ langs }
             </ul>
-            English
+            <span>English</span>
             </div>
         <span class="space"></span>
-        <div class="lang" id="lang2"><ul class="list-langs">
+        <div class="lang" id="lang2">
+            <ul class="list-langs">
                 ${ langs }
             </ul>
-            Spanish</div>
+            <span>Spanish</span>
+            </div>
       </div>
       <div class="boxs">
         <textarea aria-multiline="true" id="input"> </textarea>
@@ -90,6 +93,10 @@ class SideBarProvider implements vscode.WebviewViewProvider {
       <div class="action-btn">
         <button id="btn">Translate</button>
       </div>
+      <div style="display:none">
+        <ul class="list-langs-code">
+            ${ langsCode }
+        </ul>
     </div>
     <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
 </body>
@@ -117,13 +124,26 @@ function getNonce() {
 function listLang() : string {
     const list_langs: Array<string> = [];
     let langs: string = ``;
-
+    let index = 0;
     Langs.forEach((k, v) => {
-        list_langs.push(''.concat('<li>',v,'</li>'));
+        list_langs.push(`<li id="${index}">${v}</li>`);
+        index++;
     });
 
     langs = list_langs.join('\n');
     return langs;
+}
+
+function listLangCode() : string {
+    const list_langs_code: Array<string> = [];
+    let code: string = ``;
+
+    Langs.forEach((k, v) => {
+        list_langs_code.push(''.concat('<li>',k,'</li>'));
+    });
+
+    code = list_langs_code.join(',');
+    return code;
 }
 
 export default SideBarProvider;

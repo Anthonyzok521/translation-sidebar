@@ -1,6 +1,8 @@
 const languages = document.querySelector('.languages');
 const listLanguages = document.querySelectorAll('.list-langs');
+const listLanguagesCode = document.querySelectorAll('.list-langs-code');
 const code = document.querySelectorAll('.code');
+/**  @type {HTMLTextAreaElement} */
 const input = document.querySelector('#input');
 const output = document.querySelector('#output');
 const btn = document.querySelector('#btn');
@@ -9,41 +11,101 @@ const loader = document.querySelector('.loader');
 const lang1 = document.querySelector('#lang1');
 const lang2 = document.querySelector('#lang2');
 
-languages.addEventListener('click', (e) => {
-    if (e.target && e.target.tagName === 'DIV') {
-        if (e.target.id === 'lang1') {
-            lang2.classList.remove('select');
-            lang1.classList.add('select');
-            listLanguages[0].classList.toggle('select');
-            /*code[0].textContent = 'En';
-            code[1].textContent = 'Es';
-            code[0].classList.remove('anim');
-            code[1].classList.remove('anim');*/
-        } else if (e.target.id === 'lang2') {
-            lang1.classList.remove('select');
-            lang2.classList.add('select');
-            code[0].textContent = 'Es';
-            code[1].textContent = 'En';
-            code[0].classList.remove('anim');
-            code[1].classList.remove('anim');
-        }
-        setTimeout(() => {
-            code[0].classList.add('anim');
-            code[1].classList.add('anim');
-            listLanguages.forEach(li => {
-                if (li.textContent === lang1.children[0].textContent) {
-                    li.classList.toggle('select');
-                }
-                if (li.textContent === lang2.children[0].textContent) {
-                    li.classList.toggle('select');
-                }
-            });
-        }, 10);
+let codes = [];
+listLanguagesCode[0].childNodes.forEach(li => {
+    if (li.tagName === 'LI') {
+        let c = li.textContent.trim();
+        codes.push(c);
     }
 });
 
-listLanguages[0].addEventListener('mouseleave', () => { listLanguages[0].classList.toggle('select'); });
-listLanguages[1].addEventListener('mouseleave', () => { listLanguages[1].classList.toggle('select'); });
+languages.addEventListener('click', (e) => {
+
+    let lang_actual = '';
+    let lang_selected = '';
+
+    if (e.target && e.target.tagName === 'DIV' || e.target.tagName === 'SPAN') {
+        if (e.target.id === 'lang1' || e.target.parentElement.id === 'lang1') {
+            lang2.classList.remove('select');
+            lang1.classList.add('select');
+            listLanguages[0].classList.toggle('select');
+        } else if (e.target.id === 'lang2' || e.target.parentElement.id === 'lang2') {
+            lang1.classList.remove('select');
+            lang2.classList.add('select');
+            listLanguages[1].classList.toggle('select');
+        }
+        setTimeout(() => {
+            code[0].classList.remove('anim');
+            code[1].classList.remove('anim');
+
+            listLanguages.forEach(ul => {
+
+                if (ul.classList.contains('select')) {
+                    ul.childNodes.forEach(li => {
+                        if (li.textContent === e.target.children[1].textContent) {
+                            li.classList.add('select');
+                        }
+                        if (li.tagName === 'LI' && li.textContent !== e.target.children[1].textContent) {
+                            li.classList.remove('select');
+                        }
+                    });
+                }
+
+            });
+        }, 10);
+    }
+
+    if (e.target && e.target.tagName === 'LI') {
+        const ul = e.target.parentElement;
+        /** @type {HTMLDivElement} */
+        const div = ul.parentElement;
+        const lang = div.children[1];
+        let index = null;
+        lang_actual = lang.textContent;
+        lang.textContent = e.target.textContent;
+        ul.childNodes.forEach(li => {
+            if (li.tagName === 'LI') {
+                li.classList.remove('select');
+            }
+        });
+        e.target.classList.toggle('select');
+        ul.childNodes.forEach(li => {
+            if (li.tagName === 'LI' && li.classList.contains('select')) {
+                index = parseInt(li.id);
+            }
+        });
+        lang_selected = lang.textContent;
+        if (div.id === 'lang1') {
+            if (lang_selected === lang2.children[1].textContent) {
+                lang2.children[1].textContent = lang_actual;
+                let a = code[0].textContent;
+                code[0].textContent = code[1].textContent;
+                code[1].textContent = a;
+            }
+            code[0].textContent = codes[index];
+
+        } else if (div.id === 'lang2') {
+            if (lang_selected === lang1.children[1].textContent) {
+                lang1.children[1].textContent = lang_actual;
+                let a = code[1].textContent;
+                code[1].textContent = code[0].textContent;
+                code[0].textContent = a;
+            }
+            code[1].textContent = codes[index];
+        }
+    }
+});
+
+listLanguages[0].addEventListener('mouseleave', () => {
+    listLanguages[0].classList.toggle('select');
+    code[0].classList.add('anim');
+    code[1].classList.add('anim');
+});
+listLanguages[1].addEventListener('mouseleave', () => {
+    listLanguages[1].classList.toggle('select');
+    code[0].classList.add('anim');
+    code[1].classList.add('anim');
+});
 
 btn.addEventListener('click', async() => {
     if (input.value !== '') {
@@ -84,3 +146,5 @@ async function writeClipboardText(text) {
         console.error(error.message);
     }
 }
+
+console.log(codes);
