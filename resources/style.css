@@ -70,6 +70,28 @@ img {
     margin: 10px 0;
 }
 
+#circle{
+    background-color: #1874e4;
+    height: 30px;
+    width: 30px;
+    border-radius: 100px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin: 10px 0;
+    transition: all ease .2s;
+}
+
+#circle:hover{
+    background-color: #1851aa;
+}
+
+#circle:active{
+    background-color: transparent;
+}
+
 textarea {
     resize: none;
     width: 100%;
@@ -177,26 +199,61 @@ textarea {
     position: relative;
 }
 
-.copy {
-    position: absolute;
+.icon-input {
     width: 15px;
     height: 15px;
     opacity: 0.5;
-    bottom: 10px;
-    right: 10px;
     transition: 0.2s ease;
     transform: scale(1.0);
 }
 
-.copy:hover {
+.icon-input:hover {
     opacity: 1;
     transition: 0.2s ease;
 }
 
-.copy.click {
+.icon-input.click {
     width: 20px;
     height: 20px;
     transition: 0.1s ease;
+}
+
+.copy {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+#tooltip{
+    position: absolute;
+    display: none;
+    width: max-content;
+    height: 22px;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-family: cursive;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #141414;
+}
+
+.options-input {
+    position: absolute;
+    top: 165px;
+    padding: 0 15px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.ctrl-intro{
+    border: 1px 1px 2px 1px solid gray;
+    border-radius: 2px;
+    padding: 2px;
+    font-family: console;
+    color: white;
 }
 
 .loader.spinner {

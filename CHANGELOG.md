@@ -83,3 +83,10 @@ New Features
 ### Changed
 
 ### Fixed
+
+## [1.0.4] - 2025-02-03
+ New Features
+ ### Added
+ - Swicth languages
+ - Button clipboard
+ - Action Keydown Ctrl + Enter

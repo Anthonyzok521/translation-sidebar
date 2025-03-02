@@ -42,6 +42,8 @@ class SideBarProvider implements vscode.WebviewViewProvider {
         const style = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'style.css'));
         const image = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'icon.svg'));
         const copy = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'copy.svg'));
+        const clipBoard = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'clipboard.svg'));
+        const arrows = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'resources', 'arrows.svg'));
         const nonce = getNonce();
         const langs = listLang();
         const langsCode = listLangCode();
@@ -69,21 +71,19 @@ class SideBarProvider implements vscode.WebviewViewProvider {
             </ul>
             <span>English</span>
             </div>
-        <span class="space"></span>
+        <div><img id="circle" src="${arrows}"/></div>
         <div class="lang" id="lang2">
-            <ul class="list-langs">
-                ${ langs }
-            </ul>
             <span>Spanish</span>
             </div>
       </div>
       <div class="boxs">
         <textarea aria-multiline="true" id="input"> </textarea>
+        <div class="options-input"><span class="ctrl-intro">Ctrl + ↵</span><img class="icon-input clipboard" src="${clipBoard}"></div>
         <div class="space"></div>
         <div class="out">
             <textarea readonly aria-multiline="true" id="output"> </textarea>
             <div class="loader"></div>
-            <img class="copy" src="${copy}">
+            <img class="icon-input copy" src="${copy}">
         </div>
         <div class="langs-code">
             <div class="code anim">En</div>
@@ -98,6 +98,7 @@ class SideBarProvider implements vscode.WebviewViewProvider {
             ${ langsCode }
         </ul>
     </div>
+    <div id="tooltip"></div>
     <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
 </body>
 
